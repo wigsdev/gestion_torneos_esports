@@ -1,0 +1,28 @@
+# === Binarios y Ejecutables ===
+*.exe
+*.out
+*.app
+*.o
+*.obj
+
+# === Carpetas de Herramientas de Compilación ===
+build/
+bin/
+obj/
+main
+
+# === Configuraciones de Entornos de Desarrollo (IDEs) ===
+.vscode/
+.idea/
+*.suo
+*.user
+*.userossc
+*.sln
+*.vcxproj
+*.filters
+
+# === Archivos Temporales e Historiales ===
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
