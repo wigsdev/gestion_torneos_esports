@@ -16,7 +16,8 @@
 // ==============================================================================
 // Implementar aquí la búsqueda binaria por ID (con copia temporal a arreglo):
 // - NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
-
+int contarNodos(NodoJugador* fin);
+NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 6: ALGORITMOS DE ORDENAMIENTO ---
 // ==============================================================================
