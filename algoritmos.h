@@ -22,7 +22,7 @@ NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 6: ALGORITMOS DE ORDENAMIENTO ---
 // ==============================================================================
 // Declarar aquí los ordenamientos sobre la lista circular de jugadores:
-// - void ordenarPorEdadBurbuja(NodoJugador* fin);
+void ordenarPorEdadBurbuja(NodoJugador* fin);
 // - void ordenarPorNicknameSeleccion(NodoJugador* fin);
 // - void ordenarPorNombreInsercion(NodoJugador* fin);
 // - void ordenarPorRankingQuickSort(NodoJugador* fin);

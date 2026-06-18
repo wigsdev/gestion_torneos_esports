@@ -169,7 +169,7 @@ int main() {
                                 int id;
                                 cout << "Ingrese ID a buscar: "; cin >> id;
                                 // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 5):
-                                // NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
                             }
                             break;
                         }
@@ -182,7 +182,7 @@ int main() {
                             cout << "5. Ordenar por ID (Merge Sort)" << endl;
                             cout << "Seleccione tipo de ordenamiento: "; cin >> opO;
                             if (opO == 1) {
-                                // ordenarPorEdadBurbuja(listaJugadores);
+                                ordenarPorEdadBurbuja(listaJugadores);
                             } else if (opO == 2) {
                                 // ordenarPorNicknameSeleccion(listaJugadores);
                             } else if (opO == 3) {

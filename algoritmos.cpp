@@ -1,4 +1,5 @@
 #include "algoritmos.h"
+#include "jugadores.h"
 
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
@@ -52,4 +53,33 @@ NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id) {
     }
     delete[] arr;
     return resultado;
+}
+
+// Implementación de los ordenamientos sobre la lista circular de jugadores:
+
+// 1. Ordenamientos burbuja (Por Edad)
+void ordenarPorEdadBurbuja(NodoJugador *fin) {
+    if (fin == nullptr) {
+        return; // lista vacia nada que ordenar    
+    }
+
+    bool intercambiado;
+    do {
+        intercambiado = false;
+        NodoJugador* actual = fin->siguiente; // apunta al primer nodo (cabeza)
+
+        // recorrermos la lista circular comparando elementos adyacentes
+        while (actual->siguiente != fin->siguiente) {
+            if (actual->dato.edad > actual->siguiente->dato.edad) {
+                // intercambiamos los datos de tipo jugador entre los nodos
+                Jugador temp = actual->dato;
+                actual->dato = actual->siguiente->dato;
+                actual->siguiente->dato = temp;
+
+                intercambiado = true; // indicamos que hubo un cambio en esta pasada
+            }
+            actual = actual->siguiente; // avanzamos al siguiente nodo
+        
+        }
+    }while (intercambiado); // si en una pasada completa hubo algún cambio, repetimos.
 }
