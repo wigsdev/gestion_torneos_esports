@@ -1,5 +1,10 @@
 #include "algoritmos.h"
 
+// ==============================================================================
+// --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
+// ==============================================================================
+// Implementación de la búsqueda binaria por ID (con copia temporal a arreglo):
+
 // Implementación de contarNodos
 int contarNodos(NodoJugador* fin) {
     if (fin == nullptr) {

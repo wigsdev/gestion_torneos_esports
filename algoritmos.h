@@ -7,21 +7,21 @@
 // ==============================================================================
 // --- VICTOR (Integrante 2) - MÓDULO 5: MOTORES DE BÚSQUEDA (SECUENCIAL) ---
 // ==============================================================================
-// Implementar aquí las búsquedas secuenciales:
+// Declarar aquí las búsquedas secuenciales:
 // - NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname);
 // - NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre);
 
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
 // ==============================================================================
-// Implementar aquí la búsqueda binaria por ID (con copia temporal a arreglo):
+// Declarar aquí la búsqueda binaria por ID (con copia temporal a arreglo):
 // - NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
 int contarNodos(NodoJugador* fin);
 NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 6: ALGORITMOS DE ORDENAMIENTO ---
 // ==============================================================================
-// Implementar aquí los ordenamientos sobre la lista circular de jugadores:
+// Declarar aquí los ordenamientos sobre la lista circular de jugadores:
 // - void ordenarPorEdadBurbuja(NodoJugador* fin);
 // - void ordenarPorNicknameSeleccion(NodoJugador* fin);
 // - void ordenarPorNombreInsercion(NodoJugador* fin);
@@ -31,7 +31,7 @@ NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 7: REPORTES ESTADÍSTICOS RECURSIVOS ---
 // ==============================================================================
-// Implementar aquí los reportes analíticos utilizando recursividad:
+// Declarar aquí los reportes analíticos utilizando recursividad:
 // - void mostrarRankingRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 // - int contarJugadoresRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 // - int sumarPuntajesRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
