@@ -10,10 +10,16 @@ struct NodoJugador {
 };
 
 // --- TODO (Integrante 1) ---
+
 // Implementar aquí las funciones de la Lista Circular:
+
 // - registrarJugador
+void registrarJugador(NodoJugador* &cabeza, Jugador nuevoJugador ); // inicializado en el Main
 // - eliminarJugador
+void eliminarJugador(NodoJugador* &cabeza, int id);// se va a buscar con el ID
 // - modificarJugador
+void modificarJugador(NodoJugador* cabeza, int id, Jugador modificado); // solo por valor 
 // - mostrarJugadores
+void mostrarJugadores (NodoJugador* cabeza);
 
 #endif
