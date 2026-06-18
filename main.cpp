@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "estructuras.h"
 #include "jugadores.h"
 #include "partidas.h"
@@ -8,13 +9,321 @@
 
 using namespace std;
 
+// ==============================================================================
+// 1. PUNTEROS GLOBALES / DE CONTROL DE LAS ESTRUCTURAS
+// ==============================================================================
+NodoJugador* listaJugadores = nullptr; // Módulo 1: Lista Circular de Jugadores
+NodoPartida* listaPartidas = nullptr;   // Módulo 2: Lista Simple de Partidas
+NodoCola* colaFrente = nullptr;         // Módulo 3: Cola de Inscripción (Frente)
+NodoCola* colaFin = nullptr;            // Módulo 3: Cola de Inscripción (Fin)
+NodoCampeon* pilaCampeones = nullptr;   // Módulo 4: Pila de Campeones
+
+// ==============================================================================
+// 2. DECLARACIÓN DE MENÚS Y SUBMENÚS
+// ==============================================================================
+void menuPrincipal() {
+    cout << "\n==========================================" << endl;
+    cout << "  SISTEMA DE GESTIÓN DE TORNEOS DE ESPORTS  " << endl;
+    cout << "==========================================" << endl;
+    cout << "1. Gestión de Jugadores (Lista Circular)" << endl;
+    cout << "2. Cola de Inscripciones (Cola FIFO)" << endl;
+    cout << "3. Historial de Partidas (Lista Simple)" << endl;
+    cout << "4. Salón de la Fama (Pila LIFO)" << endl;
+    cout << "5. Reportes Estadísticos (Recursivos)" << endl;
+    cout << "6. Salir del Sistema" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+void submenuJugadores() {
+    cout << "\n------------------------------------------" << endl;
+    cout << "          GESTIÓN DE JUGADORES" << endl;
+    cout << "------------------------------------------" << endl;
+    cout << "1. Registrar nuevo jugador" << endl;
+    cout << "2. Eliminar jugador (por ID)" << endl;
+    cout << "3. Modificar jugador (por ID)" << endl;
+    cout << "4. Mostrar lista de jugadores" << endl;
+    cout << "5. Buscar jugador (Secuencial / Binaria)" << endl;
+    cout << "6. Ordenar jugadores (Burbuja / Selección / Inserción / Quick / Merge)" << endl;
+    cout << "7. Volver al menú principal" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+void submenuInscripciones() {
+    cout << "\n------------------------------------------" << endl;
+    cout << "          COLA DE INSCRIPCIONES" << endl;
+    cout << "------------------------------------------" << endl;
+    cout << "1. Inscribir jugador en cola de espera" << endl;
+    cout << "2. Mostrar lista de espera" << endl;
+    cout << "3. Atender inscripción (Desencolar y registrar en torneo)" << endl;
+    cout << "4. Volver al menú principal" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+void submenuPartidas() {
+    cout << "\n------------------------------------------" << endl;
+    cout << "          HISTORIAL DE PARTIDAS" << endl;
+    cout << "------------------------------------------" << endl;
+    cout << "1. Registrar resultado de partida" << endl;
+    cout << "2. Mostrar todas las partidas jugadas" << endl;
+    cout << "3. Volver al menú principal" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+void submenuCampeones() {
+    cout << "\n------------------------------------------" << endl;
+    cout << "          SALÓN DE LA FAMA (PILA)" << endl;
+    cout << "------------------------------------------" << endl;
+    cout << "1. Registrar nuevo campeón de torneo" << endl;
+    cout << "2. Consultar último campeón" << endl;
+    cout << "3. Ver historial de campeones completo" << endl;
+    cout << "4. Eliminar último campeón registrado" << endl;
+    cout << "5. Volver al menú principal" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+void submenuReportes() {
+    cout << "\n------------------------------------------" << endl;
+    cout << "        REPORTES Y ESTADÍSTICAS RECURSIVAS" << endl;
+    cout << "------------------------------------------" << endl;
+    cout << "1. Mostrar ranking de jugadores" << endl;
+    cout << "2. Contar total de jugadores en el torneo" << endl;
+    cout << "3. Sumar puntajes de ranking totales" << endl;
+    cout << "4. Buscar jugador por nickname" << endl;
+    cout << "5. Volver al menú principal" << endl;
+    cout << "Selecciona una opción: ";
+}
+
+// ==============================================================================
+// 3. FUNCIÓN PRINCIPAL (ORQUESTADOR)
+// ==============================================================================
 int main() {
-    cout << "===========================================" << endl;
-    cout << "SISTEMA DE GESTIÓN DE TORNEOS DE VIDEOJUEGOS" << endl;
-    cout << "===========================================" << endl;
-    
-    // --- TODO (Integrante 4 / Líder) ---
-    // Implementar la navegación del Menú Principal
-    
+    int opcionPrincipal;
+
+    do {
+        menuPrincipal();
+        if (!(cin >> opcionPrincipal)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
+
+        switch (opcionPrincipal) {
+            case 1: { // GESTIÓN DE JUGADORES
+                int op;
+                do {
+                    submenuJugadores();
+                    cin >> op;
+                    switch (op) {
+                        case 1: {
+                            Jugador nuevo;
+                            cout << "Ingrese ID: "; cin >> nuevo.id;
+                            cout << "Ingrese Nombre: "; cin.ignore(); getline(cin, nuevo.nombre);
+                            cout << "Ingrese Nickname: "; getline(cin, nuevo.nickname);
+                            cout << "Ingrese Edad: "; cin >> nuevo.edad;
+                            cout << "Ingrese Puntaje Ranking: "; cin >> nuevo.ranking;
+                            // LLAMADA INTEGRANTE 1:
+                            // registrarJugador(listaJugadores, nuevo);
+                            break;
+                        }
+                        case 2: {
+                            int id;
+                            cout << "Ingrese el ID del jugador a eliminar: "; cin >> id;
+                            // LLAMADA INTEGRANTE 1:
+                            // eliminarJugador(listaJugadores, id);
+                            break;
+                        }
+                        case 3: {
+                            int id;
+                            cout << "Ingrese el ID del jugador a modificar: "; cin >> id;
+                            Jugador mod;
+                            cout << "Ingrese nuevo Nombre: "; cin.ignore(); getline(cin, mod.nombre);
+                            cout << "Ingrese nuevo Nickname: "; getline(cin, mod.nickname);
+                            cout << "Ingrese nueva Edad: "; cin >> mod.edad;
+                            cout << "Ingrese nuevo Puntaje: "; cin >> mod.ranking;
+                            mod.id = id;
+                            // LLAMADA INTEGRANTE 1:
+                            // modificarJugador(listaJugadores, id, mod);
+                            break;
+                        }
+                        case 4:
+                            // LLAMADA INTEGRANTE 1:
+                            // mostrarJugadores(listaJugadores);
+                            break;
+                        case 5: { // Búsquedas (Integrante 3)
+                            int opB;
+                            cout << "\n1. Buscar por Nickname (Secuencial)" << endl;
+                            cout << "2. Buscar por Nombre (Secuencial)" << endl;
+                            cout << "3. Buscar por ID (Binaria)" << endl;
+                            cout << "Seleccione tipo de búsqueda: "; cin >> opB;
+                            if (opB == 1) {
+                                string nick;
+                                cout << "Ingrese Nickname a buscar: "; cin.ignore(); getline(cin, nick);
+                                // NodoJugador* res = buscarPorNickname(listaJugadores, nick);
+                            } else if (opB == 2) {
+                                string nom;
+                                cout << "Ingrese Nombre a buscar: "; cin.ignore(); getline(cin, nom);
+                                // NodoJugador* res = buscarPorNombre(listaJugadores, nom);
+                            } else if (opB == 3) {
+                                int id;
+                                cout << "Ingrese ID a buscar: "; cin >> id;
+                                // NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                            }
+                            break;
+                        }
+                        case 6: { // Ordenamientos (Integrante 4)
+                            int opO;
+                            cout << "\n1. Ordenar por Edad (Burbuja)" << endl;
+                            cout << "2. Ordenar por Nickname (Selección)" << endl;
+                            cout << "3. Ordenar por Nombre (Inserción)" << endl;
+                            cout << "4. Ordenar por Ranking (Quick Sort)" << endl;
+                            cout << "5. Ordenar por ID (Merge Sort)" << endl;
+                            cout << "Seleccione tipo de ordenamiento: "; cin >> opO;
+                            if (opO == 1) {
+                                // ordenarPorEdadBurbuja(listaJugadores);
+                            } else if (opO == 2) {
+                                // ordenarPorNicknameSeleccion(listaJugadores);
+                            } else if (opO == 3) {
+                                // ordenarPorNombreInsercion(listaJugadores);
+                            } else if (opO == 4) {
+                                // ordenarPorRankingQuickSort(listaJugadores);
+                            } else if (opO == 5) {
+                                // ordenarPorIDMergeSort(listaJugadores);
+                            }
+                            break;
+                        }
+                    }
+                } while (op != 7);
+                break;
+            }
+            case 2: { // COLA DE INSCRIPCIONES
+                int op;
+                do {
+                    submenuInscripciones();
+                    cin >> op;
+                    switch (op) {
+                        case 1: {
+                            Jugador j;
+                            cout << "Ingrese ID: "; cin >> j.id;
+                            cout << "Ingrese Nombre: "; cin.ignore(); getline(cin, j.nombre);
+                            cout << "Ingrese Nickname: "; getline(cin, j.nickname);
+                            cout << "Ingrese Edad: "; cin >> j.edad;
+                            cout << "Ingrese Puntaje Ranking: "; cin >> j.ranking;
+                            // LLAMADA INTEGRANTE 2:
+                            // encolarInscripcion(colaFrente, colaFin, j);
+                            break;
+                        }
+                        case 2:
+                            // LLAMADA INTEGRANTE 2:
+                            // mostrarCola(colaFrente);
+                            break;
+                        case 3: { // Atender inscripción
+                            // INTEGRACIÓN DE LA COLA A LA LISTA CIRCULAR (INTEGRANTES 1 Y 2)
+                            /*
+                            if (colaFrente == nullptr) {
+                                cout << "No hay jugadores en lista de espera." << endl;
+                            } else {
+                                Jugador jAtendido = desencolarInscripcion(colaFrente, colaFin);
+                                registrarJugador(listaJugadores, jAtendido);
+                                cout << "Jugador " << jAtendido.nickname << " admitido en el torneo." << endl;
+                            }
+                            */
+                            break;
+                        }
+                    }
+                } while (op != 4);
+                break;
+            }
+            case 3: { // HISTORIAL DE PARTIDAS
+                int op;
+                do {
+                    submenuPartidas();
+                    cin >> op;
+                    switch (op) {
+                        case 1: {
+                            Partida p;
+                            cout << "Ingrese Nickname Jugador A: "; cin.ignore(); getline(cin, p.jugadorA);
+                            cout << "Ingrese Nickname Jugador B: "; getline(cin, p.jugadorB);
+                            cout << "Ingrese Nickname del Ganador: "; getline(cin, p.ganador);
+                            cout << "Ingrese Fecha (DD/MM/AAAA): "; getline(cin, p.fecha);
+                            // LLAMADA INTEGRANTE 2:
+                            // registrarPartida(listaPartidas, p);
+                            break;
+                        }
+                        case 2:
+                            // LLAMADA INTEGRANTE 2:
+                            // mostrarPartidas(listaPartidas);
+                            break;
+                    }
+                } while (op != 3);
+                break;
+            }
+            case 4: { // HISTORIAL DE CAMPEONES
+                int op;
+                do {
+                    submenuCampeones();
+                    cin >> op;
+                    switch (op) {
+                        case 1: {
+                            Campeon c;
+                            cout << "Ingrese Nickname del Campeón: "; cin.ignore(); getline(cin, c.nickname);
+                            cout << "Ingrese Nombre del Torneo: "; getline(cin, c.nombreTorneo);
+                            // LLAMADA INTEGRANTE 3:
+                            // pushCampeon(pilaCampeones, c);
+                            break;
+                        }
+                        case 2:
+                            // LLAMADA INTEGRANTE 3:
+                            // consultarUltimoCampeon(pilaCampeones);
+                            break;
+                        case 3:
+                            // LLAMADA INTEGRANTE 3:
+                            // mostrarHistorial(pilaCampeones);
+                            break;
+                        case 4:
+                            // LLAMADA INTEGRANTE 3:
+                            // popCampeon(pilaCampeones);
+                            break;
+                    }
+                } while (op != 5);
+                break;
+            }
+            case 5: { // REPORTES ESTADÍSTICOS RECURSIVOS (Integrante 3)
+                int op;
+                do {
+                    submenuReportes();
+                    cin >> op;
+                    switch (op) {
+                        case 1:
+                            // LLAMADA INTEGRANTE 3 (Recursiva):
+                            // mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
+                            break;
+                        case 2: {
+                            // int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
+                            // cout << "Total de jugadores: " << total << endl;
+                            break;
+                        }
+                        case 3: {
+                            // int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
+                            // cout << "Suma total de puntajes de ranking: " << suma << endl;
+                            break;
+                        }
+                        case 4: {
+                            string nick;
+                            cout << "Ingrese Nickname a buscar recursivamente: "; cin.ignore(); getline(cin, nick);
+                            // NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            break;
+                        }
+                    }
+                } while (op != 5);
+                break;
+            }
+            case 6:
+                cout << "\nSaliendo del sistema..." << endl;
+                break;
+            default:
+                cout << "\nOpción inválida." << endl;
+        }
+    } while (opcionPrincipal != 6);
+
     return 0;
 }
