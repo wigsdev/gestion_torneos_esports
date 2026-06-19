@@ -335,3 +335,19 @@ void mostrarRankingRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVu
     // llamada recursiva: pasamos al siguiente nodo y marcamos primeravuelta como 'false'
     mostrarRankingRecursivo(nodo->siguiente, fin, false);
 }
+
+// 2. contar jugadores recursivamente
+int contarJugadoresRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVuelta) {
+    // caso base 1: lista vacía
+    if (nodo == nullptr) {
+        return 0;    
+    }
+
+    // caso base 2: dimos la vuelta completa
+    if (!primeraVuelta && nodo == fin->siguiente) {
+        return 0;    
+    }
+
+    // llamada recursiva: sumamos 1 por el nodo actual mas el resultado del conteo del resto de la lista
+    return 1 + contarJugadoresRecursivo(nodo->siguiente, fin, false);
+}

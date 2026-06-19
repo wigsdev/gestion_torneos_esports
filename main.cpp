@@ -303,8 +303,8 @@ int main() {
                             break;
                         case 2: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Total de jugadores: " << total << endl;
+                            int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
+                            cout << "Total de jugadores: " << total << endl;
                             break;
                         }
                         case 3: {
