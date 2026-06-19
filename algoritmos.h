@@ -26,7 +26,7 @@ void ordenarPorEdadBurbuja(NodoJugador* fin);
 void ordenarPorNicknameSeleccion(NodoJugador* fin);
 void ordenarPorNombreInsercion(NodoJugador* fin);
 void ordenarPorRankingQuickSort(NodoJugador* fin);
-// - void ordenarPorIDMergeSort(NodoJugador* fin);
+void ordenarPorIDMergeSort(NodoJugador* fin);
 
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 7: REPORTES ESTADÍSTICOS RECURSIVOS ---

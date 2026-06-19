@@ -1,6 +1,7 @@
 #include "algoritmos.h"
 #include "estructuras.h"
 #include "jugadores.h"
+#include <algorithm>
 
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
@@ -206,3 +207,102 @@ void ordenarPorRankingQuickSort(NodoJugador* fin) {
     // liberamos la memoria del arreglo temporal para evitar fuga de memoria
     delete [] arr;
 }
+
+// función auxiliar interna para fusionar dos sub-arreglos ordenados (Merge)
+void merge(Jugador arr[], int izuquierda, int medio, int derecha) {
+    int n1 = medio - izuquierda + 1;
+    int n2 = derecha - medio;
+
+    // creamos arreglos auxiliares temporales
+    Jugador* L = new Jugador[n1];
+    Jugador* R = new Jugador[n2];
+
+    // copiamos los datos a los arreglos auxiliares L[] y R[]
+    for (int i = 0; i < n1; i++) {
+        L[i] = arr[izuquierda + i];    
+    }
+
+    for (int j = 0; j < n2; j++) {
+        R[j] = arr[medio + 1 + j];    
+    }
+
+    // fusionamos los arreglos temporales de regreso en arr[izquierda..derecha]
+    int i = 0; // indice inicial del primer sub-arreglo (izquerda)
+    int j = 0; // indice inicial del segundo sub-arreglo (derecho)
+    int k = izuquierda; // indice inicial del arreglo fusionado
+
+    while (i < n1 && j < n2) {
+        // ordenamiento por ID de forma ASCENDENTE (de menor a mayor ID)
+        if (L[i].id <= R[j].id) {
+            arr[k] = L[i];
+            i++;        
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // copiamos los elementos restantes de L[], si quedan alguno
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;    
+    }
+
+    // copiamos los elementos restantes de R[], si quedan alguno
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;    
+    }
+
+    // liberamos la memoria de los arreglos auxiliares
+    delete [] L;
+    delete [] R;
+}
+
+// función auxiliar recursiva de MergeSort
+void mergeSortArray(Jugador arr[], int izquierda, int derecha) {
+    if (izquierda >= derecha) {
+        return; // caso base: un solo elemento    
+    }
+
+    int medio = izquierda + (derecha - izquierda) / 2; // evitamos desboradamientos
+
+    // dividimos y ordenamos de forma recursiva ambas mitades
+    mergeSortArray(arr, izquierda, medio);
+    mergeSortArray(arr, medio + 1, derecha);
+
+    // fusionamos las dos mitades ordenadas
+    merge(arr, izquierda, medio, derecha);
+}
+
+// 5. ordenamiento MergeSort (Por ID - Ascendente)
+void ordenarPorIDMergeSort(NodoJugador *fin) {
+    if (fin == nullptr || fin->siguiente == fin) {
+        return; // lista vacía o con un solo elemento    
+    }
+
+    int N = contarNodos(fin);
+    Jugador* arr = new Jugador[N]; // reservamos el arreglo dinámico
+
+    // copiamos la lista circular al arreglo
+    NodoJugador* actual = fin->siguiente;
+    for (int i = 0; i < N; i++) {
+        arr[i] = actual->dato;
+        actual = actual->siguiente;   
+    }
+
+    // ejecutamos MergeSort sobre el arreglo de structs
+    mergeSortArray(arr, 0, N - 1);
+
+    // copiamos los datos ordenados del arreglo de regreso a lo lista circular
+    actual = fin->siguiente;
+    for (int i = 0; i < N; i++) {
+        actual->dato = arr[i];
+        actual = actual->siguiente;
+    }
+
+    delete[] arr; // liberamos el arreglo dinámico
+} 

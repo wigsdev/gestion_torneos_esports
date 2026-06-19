@@ -190,7 +190,7 @@ int main() {
                             } else if (opO == 4) {
                                 ordenarPorRankingQuickSort(listaJugadores);
                             } else if (opO == 5) {
-                                // ordenarPorIDMergeSort(listaJugadores);
+                                ordenarPorIDMergeSort(listaJugadores);
                             }
                             break;
                         }
