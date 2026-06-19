@@ -122,14 +122,14 @@ int main() {
                             cout << "Ingrese Edad: "; cin >> nuevo.edad;
                             cout << "Ingrese Puntaje Ranking: "; cin >> nuevo.ranking;
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 1):
-                            // registrarJugador(listaJugadores, nuevo);
+                            registrarJugador(listaJugadores, nuevo);
                             break;
                         }
                         case 2: {
                             int id;
                             cout << "Ingrese el ID del jugador a eliminar: "; cin >> id;
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 1):
-                            // eliminarJugador(listaJugadores, id);
+                            eliminarJugador(listaJugadores, id);
                             break;
                         }
                         case 3: {
@@ -142,12 +142,12 @@ int main() {
                             cout << "Ingrese nuevo Puntaje: "; cin >> mod.ranking;
                             mod.id = id;
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 1):
-                            // modificarJugador(listaJugadores, id, mod);
+                            modificarJugador(listaJugadores, id, mod);
                             break;
                         }
                         case 4:
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 1):
-                            // mostrarJugadores(listaJugadores);
+                            mostrarJugadores(listaJugadores);
                             break;
                         case 5: { // Búsquedas (Integrantes 2 y 3 - Módulo 5)
                             int opB;
@@ -159,17 +159,47 @@ int main() {
                                 string nick;
                                 cout << "Ingrese Nickname a buscar: "; cin.ignore(); getline(cin, nick);
                                 // LLAMADA INTEGRANTE 2 (Victor - Módulo 5):
-                                // NodoJugador* res = buscarPorNickname(listaJugadores, nick);
+                                NodoJugador* res = buscarPorNickname(listaJugadores, nick);
+                                if (res != nullptr) {
+                                    cout << "Jugador encontrado por Búsqueda Secuencial!" << endl;
+                                    cout << "ID: " << res->dato.id 
+                                         << " | Nombre: " << res->dato.nombre 
+                                         << " | Nickname: " << res->dato.nickname 
+                                         << " | Edad: " << res->dato.edad
+                                         << " | Ranking: " << res->dato.ranking << endl;
+                                } else {
+                                    cout << "Jugador con Nickname '" << nick << "' no encontrado." << endl;
+                                }
                             } else if (opB == 2) {
                                 string nom;
                                 cout << "Ingrese Nombre a buscar: "; cin.ignore(); getline(cin, nom);
                                 // LLAMADA INTEGRANTE 2 (Victor - Módulo 5):
-                                // NodoJugador* res = buscarPorNombre(listaJugadores, nom);
+                                NodoJugador* res = buscarPorNombre(listaJugadores, nom);
+                                if (res != nullptr) {
+                                    cout << "Jugador encontrado por Búsqueda Secuencial!" << endl;
+                                    cout << "ID: " << res->dato.id 
+                                         << " | Nombre: " << res->dato.nombre 
+                                         << " | Nickname: " << res->dato.nickname 
+                                         << " | Edad: " << res->dato.edad
+                                         << " | Ranking: " << res->dato.ranking << endl;
+                                } else {
+                                    cout << "Jugador con Nombre '" << nom << "' no encontrado." << endl;
+                                }
                             } else if (opB == 3) {
                                 int id;
                                 cout << "Ingrese ID a buscar: "; cin >> id;
                                 // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 5):
-                                // NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                if (res != nullptr) {
+                                    cout << "Jugador encontrado por Búsqueda Binaria!" << endl;
+                                    cout << "ID: " << res->dato.id 
+                                         << " | Nombre: " << res->dato.nombre 
+                                         << " | Nickname: " << res->dato.nickname 
+                                         << " | Edad: " << res->dato.edad
+                                         << " | Ranking: " << res->dato.ranking << endl;
+                                } else {
+                                    cout << "Jugador con ID " << id << " no encontrado." << endl;
+                                }
                             }
                             break;
                         }
@@ -182,15 +212,15 @@ int main() {
                             cout << "5. Ordenar por ID (Merge Sort)" << endl;
                             cout << "Seleccione tipo de ordenamiento: "; cin >> opO;
                             if (opO == 1) {
-                                // ordenarPorEdadBurbuja(listaJugadores);
+                                ordenarPorEdadBurbuja(listaJugadores);
                             } else if (opO == 2) {
-                                // ordenarPorNicknameSeleccion(listaJugadores);
+                                ordenarPorNicknameSeleccion(listaJugadores);
                             } else if (opO == 3) {
-                                // ordenarPorNombreInsercion(listaJugadores);
+                                ordenarPorNombreInsercion(listaJugadores);
                             } else if (opO == 4) {
-                                // ordenarPorRankingQuickSort(listaJugadores);
+                                ordenarPorRankingQuickSort(listaJugadores);
                             } else if (opO == 5) {
-                                // ordenarPorIDMergeSort(listaJugadores);
+                                ordenarPorIDMergeSort(listaJugadores);
                             }
                             break;
                         }
@@ -212,25 +242,26 @@ int main() {
                             cout << "Ingrese Edad: "; cin >> j.edad;
                             cout << "Ingrese Puntaje Ranking: "; cin >> j.ranking;
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 3):
-                            // encolarInscripcion(colaFrente, colaFin, j);
+                            encolarInscripcion(colaFrente, colaFin, j);
                             break;
                         }
                         case 2:
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 3):
-                            // mostrarCola(colaFrente);
+                            mostrarCola(colaFrente);
                             break;
                         case 3: { // Atender inscripción
                             // INTEGRACIÓN DE LA COLA A LA LISTA CIRCULAR (INTEGRANTES 1 Y 2)
-                            /*
+                            
                             if (colaFrente == nullptr) {
                                 cout << "No hay jugadores en lista de espera." << endl;
                             } else {
                                 // Desencola (Victor - Integrante 2 - M3) e Inserta (Javier - Integrante 1 - M1)
                                 Jugador jAtendido = desencolarInscripcion(colaFrente, colaFin);
+                                // Nota: registrarJugador se deja comentado porque Javier (Módulo 1) no está implementado
                                 registrarJugador(listaJugadores, jAtendido);
                                 cout << "Jugador " << jAtendido.nickname << " admitido en el torneo." << endl;
                             }
-                            */
+                            
                             break;
                         }
                     }
@@ -272,20 +303,20 @@ int main() {
                             cout << "Ingrese Nickname del Campeón: "; cin.ignore(); getline(cin, c.nickname);
                             cout << "Ingrese Nombre del Torneo: "; getline(cin, c.nombreTorneo);
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 4):
-                            // pushCampeon(pilaCampeones, c);
+                            pushCampeon(pilaCampeones, c);
                             break;
                         }
                         case 2:
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 4):
-                            // consultarUltimoCampeon(pilaCampeones);
+                            consultarUltimoCampeon(pilaCampeones);
                             break;
                         case 3:
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 4):
-                            // mostrarHistorial(pilaCampeones);
+                            mostrarHistorial(pilaCampeones);
                             break;
                         case 4:
                             // LLAMADA INTEGRANTE 2 (Victor - Módulo 4):
-                            // popCampeon(pilaCampeones);
+                            popCampeon(pilaCampeones);
                             break;
                     }
                 } while (op != 5);
@@ -299,31 +330,37 @@ int main() {
                     switch (op) {
                         case 1:
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
+                            mostrarRankingRecursivo(listaJugadores ? listaJugadores->siguiente : nullptr, listaJugadores, true);
                             break;
                         case 2: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Total de jugadores: " << total << endl;
+                            int total = contarJugadoresRecursivo(listaJugadores ? listaJugadores->siguiente : nullptr, listaJugadores, true);
+                            cout << "Total de jugadores: " << total << endl;
                             break;
                         }
                         case 3: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Suma total de puntajes de ranking: " << suma << endl;
+                            int suma = sumarPuntajesRecursivo(listaJugadores ? listaJugadores->siguiente : nullptr, listaJugadores, true);
+                            cout << "Suma total de puntajes de ranking: " << suma << endl;
                             break;
                         }
                         case 4: {
                             string nick;
                             cout << "Ingrese Nickname a buscar recursivamente: "; cin.ignore(); getline(cin, nick);
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            NodoJugador* res = buscarJugadorRecursivo(listaJugadores ? listaJugadores->siguiente : nullptr, listaJugadores, nick, true);
+                            if (res != nullptr) {
+                                cout << "Jugador encontrado recursivamente!" << endl;
+                                cout << "Nombre: " << res->dato.nombre << " | Ranking: " << res->dato.ranking << endl;                            
+                            } else {
+                                cout << "Jugador con nickname '" << nick << "' no fue encontrado." << endl;
+                            }
                             break;
                         }
                     }
                 } while (op != 5);
                 break;
-            }
+            }            
             case 6:
                 cout << "\nSaliendo del sistema..." << endl;
                 break;
