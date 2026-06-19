@@ -4,51 +4,37 @@
 #include "estructuras.h"
 #include "jugadores.h"
 
-// ==========================================
-// --- TODO (Integrante 3) - BÚSQUEDAS Y RECURSIVIDAD ---
-// ==========================================
-// - buscarPorNickname (secuencial)
+// ==============================================================================
+// --- VICTOR (Integrante 2) - MÓDULO 5: MOTORES DE BÚSQUEDA (SECUENCIAL) ---
+// ==============================================================================
+// Declarar aquí las búsquedas secuenciales:
+NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname);
+NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre);
 
-NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
-    if (fin == nullptr) return nullptr;
+// ==============================================================================
+// --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
+// ==============================================================================
+// Declarar aquí la búsqueda binaria por ID (con copia temporal a arreglo):
+// - NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
+int contarNodos(NodoJugador* fin);
+NodoJugador* buscarPorIDBinaria(NodoJugador* fin, int id);
+// ==============================================================================
+// --- WILMER (Integrante 3 - LÍDER) - MÓDULO 6: ALGORITMOS DE ORDENAMIENTO ---
+// ==============================================================================
+// Declarar aquí los ordenamientos sobre la lista circular de jugadores:
+void ordenarPorEdadBurbuja(NodoJugador* fin);
+void ordenarPorNicknameSeleccion(NodoJugador* fin);
+void ordenarPorNombreInsercion(NodoJugador* fin);
+void ordenarPorRankingQuickSort(NodoJugador* fin);
+void ordenarPorIDMergeSort(NodoJugador* fin);
 
-    NodoJugador* actual = fin->siguiente; 
-    do {
-        if (actual->dato.nickname == nickname) return actual;
-        actual = actual->siguiente;
-    } while (actual != fin->siguiente);
-
-    return nullptr;
-}
-
-// - buscarPorNombre (secuencial)
-
-NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre) {
-    if (fin == nullptr) return nullptr;
-
-    NodoJugador* actual = fin->siguiente; // cabeza
-    do {
-        if (actual->dato.nombre == nombre) return actual;
-        actual = actual->siguiente;
-    } while (actual != fin->siguiente);
-
-    return nullptr;
-}
-
-// - buscarPorIDBinaria
-// - mostrarRankingRecursivo
-// - contarJugadoresRecursivo
-// - sumarPuntajesRecursivo
-// - buscarJugadorRecursivo
-
-
-// ==========================================
-// --- TODO (Integrante 4) - ORDENAMIENTOS ---
-// ==========================================
-// - ordenarPorEdadBurbuja
-// - ordenarPorNicknameSeleccion
-// - ordenarPorNombreInsercion
-// - ordenarPorRankingQuickSort
-// - ordenarPorIDMergeSort
+// ==============================================================================
+// --- WILMER (Integrante 3 - LÍDER) - MÓDULO 7: REPORTES ESTADÍSTICOS RECURSIVOS ---
+// ==============================================================================
+// Declarar aquí los reportes analíticos utilizando recursividad:
+void mostrarRankingRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
+int contarJugadoresRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
+int sumarPuntajesRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
+NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string nickname, bool primeraVuelta);
 
 #endif

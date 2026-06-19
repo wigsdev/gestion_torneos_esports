@@ -15,7 +15,7 @@ TARGET = main
 HEADERS = estructuras.h jugadores.h partidas.h cola.h pila.h algoritmos.h
 
 # Archivos fuente principales
-SRCS = main.cpp
+SRCS = main.cpp algoritmos.cpp cola.cpp pila.cpp
 
 # Regla por defecto: compilar todo
 all: $(TARGET)
