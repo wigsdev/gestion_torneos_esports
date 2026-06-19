@@ -18,8 +18,8 @@ void registrarJugador(NodoJugador* &cabeza, Jugador nuevoJugador ); // inicializ
 // - eliminarJugador
 void eliminarJugador(NodoJugador* &cabeza, int id);// se va a buscar con el ID
 // - modificarJugador
-void modificarJugador(NodoJugador* cabeza, int id, Jugador modificado); // solo por valor 
+void modificarJugador(NodoJugador* cabeza, int id, Jugador modificado); // solo por valor -> dirección
 // - mostrarJugadores
-void mostrarJugadores (NodoJugador* cabeza);
+void mostrarJugadores (NodoJugador* cabeza); // 
 
 #endif
