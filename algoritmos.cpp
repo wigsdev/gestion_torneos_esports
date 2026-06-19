@@ -8,6 +8,48 @@
 using namespace std;
 
 // ==============================================================================
+// --- FUNCIÓN AUXILIAR DE NORMALIZACIÓN DE TEXTO ---
+// ==============================================================================
+#include <cctype>
+
+string aMinusculas(string str) {
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+// ==============================================================================
+// --- VICTOR (Integrante 2) - MÓDULO 5: MOTORES DE BÚSQUEDA (SECUENCIAL CASE-INSENSITIVE) ---
+// ==============================================================================
+
+// - buscarPorNickname (secuencial)
+NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
+    if (fin == nullptr) return nullptr;
+
+    NodoJugador* actual = fin->siguiente; 
+    string nickBusqueda = aMinusculas(nickname);
+    do {
+        if (aMinusculas(actual->dato.nickname) == nickBusqueda) return actual;
+        actual = actual->siguiente;
+    } while (actual != fin->siguiente);
+
+    return nullptr;
+}
+
+// - buscarPorNombre (secuencial)
+NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre) {
+    if (fin == nullptr) return nullptr;
+
+    NodoJugador* actual = fin->siguiente; // cabeza
+    string nombreBusqueda = aMinusculas(nombre);
+    do {
+        if (aMinusculas(actual->dato.nombre) == nombreBusqueda) return actual;
+        actual = actual->siguiente;
+    } while (actual != fin->siguiente);
+
+    return nullptr;
+}
+
+// ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
 // ==============================================================================
 // Implementación de la búsqueda binaria por ID (con copia temporal a arreglo):
@@ -389,44 +431,4 @@ NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string 
     return buscarJugadorRecursivo(nodo->siguiente, fin, nickname, false);
 }
 
-// ==============================================================================
-// --- FUNCIÓN AUXILIAR DE NORMALIZACIÓN DE TEXTO ---
-// ==============================================================================
-#include <cctype>
 
-string aMinusculas(string str) {
-    transform(str.begin(), str.end(), str.begin(), ::tolower);
-    return str;
-}
-
-// ==============================================================================
-// --- VICTOR (Integrante 2) - MÓDULO 5: MOTORES DE BÚSQUEDA (SECUENCIAL CASE-INSENSITIVE) ---
-// ==============================================================================
-
-// - buscarPorNickname (secuencial)
-NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
-    if (fin == nullptr) return nullptr;
-
-    NodoJugador* actual = fin->siguiente; 
-    string nickBusqueda = aMinusculas(nickname);
-    do {
-        if (aMinusculas(actual->dato.nickname) == nickBusqueda) return actual;
-        actual = actual->siguiente;
-    } while (actual != fin->siguiente);
-
-    return nullptr;
-}
-
-// - buscarPorNombre (secuencial)
-NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre) {
-    if (fin == nullptr) return nullptr;
-
-    NodoJugador* actual = fin->siguiente; // cabeza
-    string nombreBusqueda = aMinusculas(nombre);
-    do {
-        if (aMinusculas(actual->dato.nombre) == nombreBusqueda) return actual;
-        actual = actual->siguiente;
-    } while (actual != fin->siguiente);
-
-    return nullptr;
-}
