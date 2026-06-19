@@ -31,11 +31,11 @@ Gestor de torneos de eSports diseñado bajo restricciones de memoria de bajo niv
 ├── 📄 Makefile                   # Automatización de compilación
 ├── 📄 README.md                  # Presentación del proyecto (este archivo)
 ├── 📄 estructuras.h              # Definición de structs de negocio comunes
-├── 📄 jugadores.h                # Módulo de Lista Circular (Jugadores)
-├── 📄 partidas.h                 # Módulo de Lista Simple (Partidas)
-├── 📄 cola.h                     # Módulo de Cola (Inscripciones)
-├── 📄 pila.h                     # Módulo de Pila (Campeones)
-├── 📄 algoritmos.h               # Módulo de Búsquedas, Recursión y Ordenamiento
+├── 📄 jugadores.h / jugadores.cpp # Módulo de Lista Circular (Jugadores)
+├── 📄 partidas.h / partidas.cpp   # Módulo de Lista Simple (Partidas)
+├── 📄 cola.h / cola.cpp           # Módulo de Cola (Inscripciones)
+├── 📄 pila.h / pila.cpp           # Módulo de Pila (Campeones)
+├── 📄 algoritmos.h / algoritmos.cpp # Módulo de Búsquedas, Recursión y Ordenamiento
 └── 📄 main.cpp                   # Orquestador del sistema y menú interactivo
 ```
 
@@ -48,6 +48,20 @@ Gestor de torneos de eSports diseñado bajo restricciones de memoria de bajo niv
 *   Utilidad **Make** (opcional, en Windows MinGW usar `mingw32-make`).
 
 ### Ejecución con Makefile (Recomendado)
+
+**En Windows (MinGW / Git Bash):**
+```bash
+# Compilar el código
+mingw32-make
+
+# Ejecutar el programa
+./main
+
+# Limpiar archivos compilados anteriores
+mingw32-make clean
+```
+
+**En Linux / macOS:**
 ```bash
 # Compilar el código
 make
@@ -61,7 +75,7 @@ make clean
 
 ### Ejecución Manual
 ```bash
-g++ -std=c++11 -Wall main.cpp -o main
+g++ -std=c++11 -Wall main.cpp algoritmos.cpp cola.cpp pila.cpp jugadores.cpp -o main
 ./main
 ```
 
@@ -77,7 +91,7 @@ Para profundizar en la lógica, flujos de desarrollo y diseños de este sistema,
 *   📄 **[Explicación de Algoritmos](./docs/explicacion_algoritmos.md)**: Análisis detallado de los ordenamientos, búsquedas y lógica recursiva.
 *   📄 **[Diagramas de Nodos](./docs/diagramas_nodos.md)**: Representaciones gráficas de los nodos en memoria RAM.
 *   📄 **[Diagramas de Flujo](./docs/diagramas_flujo.md)**: Lógica visual del flujo de admisión y algoritmo de ordenamiento.
-*   📄 **[Esquema de Diapositivas](./docs/esquema_diapositivas.md)**: Guía de contenido sugerido para la exposición y defensa grupal.
+*   📄 **[Diapositivas de Exposición](./docs/Diapositivas.md)**: Diapositivas de contenido sintetizado listas para la presentación y defensa grupal del proyecto.
 
 ---
 
