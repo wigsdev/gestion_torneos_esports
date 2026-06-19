@@ -170,6 +170,16 @@ int main() {
                                 cout << "Ingrese ID a buscar: "; cin >> id;
                                 // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 5):
                                 NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                if (res != nullptr) {
+                                    cout << "Jugador encontrado por Búsqueda Binaria!" << endl;
+                                    cout << "ID: " << res->dato.id 
+                                         << " | Nombre: " << res->dato.nombre 
+                                         << " | Nickname: " << res->dato.nickname 
+                                         << " | Edad: " << res->dato.edad
+                                         << " | Ranking: " << res->dato.ranking << endl;
+                                } else {
+                                    cout << "Jugador con ID " << id << " no encontrado." << endl;
+                                }
                             }
                             break;
                         }
