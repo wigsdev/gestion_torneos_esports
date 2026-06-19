@@ -9,11 +9,13 @@ struct NodoCampeon {
     NodoCampeon* siguiente;
 };
 
-// --- TODO (Integrante 3) ---
-// Implementar aquí las funciones de la Pila:
-// - pushCampeon
-// - popCampeon
-// - mostrarHistorial
-// - consultarUltimoCampeon
+// ==============================================================================
+// --- VICTOR (Integrante 2) - MÓDULO 4: HISTORIAL DE CAMPEONES (PILA LIFO) ---
+// ==============================================================================
+// Implementar aquí las funciones de la Pila LIFO:
+void pushCampeon(NodoCampeon* &cima, Campeon c);
+void popCampeon(NodoCampeon* &cima);
+void mostrarHistorial(NodoCampeon* cima);
+void consultarUltimoCampeon(NodoCampeon* cima);
 
 #endif

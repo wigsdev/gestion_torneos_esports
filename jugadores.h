@@ -9,17 +9,13 @@ struct NodoJugador {
     NodoJugador* siguiente;
 };
 
-// --- TODO (Integrante 1) ---
-
+// ==============================================================================
+// --- JAVIER (Integrante 1) - MÓDULO 1: GESTIÓN DE JUGADORES (LISTA CIRCULAR) ---
+// ==============================================================================
 // Implementar aquí las funciones de la Lista Circular:
-
-// - registrarJugador
-void registrarJugador(NodoJugador* &cabeza, Jugador nuevoJugador ); // inicializado en el Main
-// - eliminarJugador
-void eliminarJugador(NodoJugador* &cabeza, int id);// se va a buscar con el ID
-// - modificarJugador
-void modificarJugador(NodoJugador* cabeza, int id, Jugador modificado); // solo por valor -> dirección
-// - mostrarJugadores
-void mostrarJugadores (NodoJugador* cabeza); // 
+void registrarJugador(NodoJugador* &fin, Jugador nuevo);
+void eliminarJugador(NodoJugador* &fin, int id);
+void modificarJugador(NodoJugador* fin, int id, Jugador modificado);
+void mostrarJugadores(NodoJugador* fin);
 
 #endif
