@@ -169,7 +169,17 @@ int main() {
                                 int id;
                                 cout << "Ingrese ID a buscar: "; cin >> id;
                                 // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 5):
-                                // NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                NodoJugador* res = buscarPorIDBinaria(listaJugadores, id);
+                                if (res != nullptr) {
+                                    cout << "Jugador encontrado por Búsqueda Binaria!" << endl;
+                                    cout << "ID: " << res->dato.id 
+                                         << " | Nombre: " << res->dato.nombre 
+                                         << " | Nickname: " << res->dato.nickname 
+                                         << " | Edad: " << res->dato.edad
+                                         << " | Ranking: " << res->dato.ranking << endl;
+                                } else {
+                                    cout << "Jugador con ID " << id << " no encontrado." << endl;
+                                }
                             }
                             break;
                         }
@@ -182,15 +192,15 @@ int main() {
                             cout << "5. Ordenar por ID (Merge Sort)" << endl;
                             cout << "Seleccione tipo de ordenamiento: "; cin >> opO;
                             if (opO == 1) {
-                                // ordenarPorEdadBurbuja(listaJugadores);
+                                ordenarPorEdadBurbuja(listaJugadores);
                             } else if (opO == 2) {
-                                // ordenarPorNicknameSeleccion(listaJugadores);
+                                ordenarPorNicknameSeleccion(listaJugadores);
                             } else if (opO == 3) {
-                                // ordenarPorNombreInsercion(listaJugadores);
+                                ordenarPorNombreInsercion(listaJugadores);
                             } else if (opO == 4) {
-                                // ordenarPorRankingQuickSort(listaJugadores);
+                                ordenarPorRankingQuickSort(listaJugadores);
                             } else if (opO == 5) {
-                                // ordenarPorIDMergeSort(listaJugadores);
+                                ordenarPorIDMergeSort(listaJugadores);
                             }
                             break;
                         }
@@ -299,25 +309,31 @@ int main() {
                     switch (op) {
                         case 1:
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
+                            mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
                             break;
                         case 2: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Total de jugadores: " << total << endl;
+                            int total = contarJugadoresRecursivo(listaJugadores, listaJugadores, true);
+                            cout << "Total de jugadores: " << total << endl;
                             break;
                         }
                         case 3: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Suma total de puntajes de ranking: " << suma << endl;
+                            int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
+                            cout << "Suma total de puntajes de ranking: " << suma << endl;
                             break;
                         }
                         case 4: {
                             string nick;
                             cout << "Ingrese Nickname a buscar recursivamente: "; cin.ignore(); getline(cin, nick);
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            if (res != nullptr) {
+                                cout << "Jugador encontrado recursivamente!" << endl;
+                                cout << "Nombre: " << res->dato.nombre << " | Ranking: " << res->dato.ranking << endl;                            
+                            } else {
+                                cout << "Jugador con nickname '" << nick << "' no fue encontrado." << endl;
+                            }
                             break;
                         }
                     }
