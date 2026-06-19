@@ -113,3 +113,29 @@ void ordenarPorNicknameSeleccion(NodoJugador *fin) {
         actual = actual->siguiente;
     }while (actual != fin->siguiente);
 }
+
+// ordenamiento por inserción (por nombre)
+void ordenarPorNombreInsercion(NodoJugador *fin) {
+    // si la lista está vacía o tiene un solo elemento, ya está ordenado
+    if (fin == nullptr || fin->siguiente == fin) {
+        return;    
+    }
+
+    NodoJugador* actual = fin->siguiente->siguiente; // empezamos a evaluar desde el segundo nodo
+    while (actual != fin->siguiente) {
+        Jugador val = actual->dato; // copiamos el dato del nodo en evaluacion
+        NodoJugador* anterior = fin->siguiente; // empezamos a comparar desde la cabeza
+        
+        // recorremos desde la cabeza hasta el nodo actual
+        while (anterior != actual) {
+            if (anterior->dato.nombre > val.nombre) {
+                // intercambio de datos para desplazar la informacion ordenada
+                Jugador temp = anterior->dato;
+                anterior->dato = actual->dato;
+                actual->dato = temp;            
+            }
+            anterior = anterior->siguiente;        
+        }
+        actual = actual->siguiente;
+    }
+}
