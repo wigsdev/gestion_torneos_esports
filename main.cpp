@@ -188,7 +188,7 @@ int main() {
                             } else if (opO == 3) {
                                 ordenarPorNombreInsercion(listaJugadores);
                             } else if (opO == 4) {
-                                // ordenarPorRankingQuickSort(listaJugadores);
+                                ordenarPorRankingQuickSort(listaJugadores);
                             } else if (opO == 5) {
                                 // ordenarPorIDMergeSort(listaJugadores);
                             }

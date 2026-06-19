@@ -139,3 +139,70 @@ void ordenarPorNombreInsercion(NodoJugador *fin) {
         actual = actual->siguiente;
     }
 }
+
+// funcion auxilar interna para ordenar el arreglo usando QuickSort (Descendente por Ranking)
+// nota: implementado mediante el esquema de partición de Hoare (dos punteros i y j)
+void quickSortArray(Jugador arr[], int izquierda, int derecha) {
+    if (izquierda >= derecha) {
+        return;    
+    }
+
+    int i = izquierda;
+    int j = derecha;
+    // seleccionamos el pivote usando la formula segura contra desbordamiento
+    Jugador pivote = arr[izquierda + (derecha - izquierda) / 2];
+
+    while (i <= j) {
+        // para ordenar de mayor a menor (descendente):
+        // Avanzamos 'i' mientras el ranking sea mayor que el pivote
+        while (arr[i].ranking > pivote.ranking) {
+            i++;        
+        }
+        // retrocedemos 'j' mientras el ranking sea menor que el pivote
+        while (arr[j].ranking < pivote.ranking) {
+            j--;        
+        }
+        if (i <= j) {
+            // intercambiamos los elementos de tipo jugador usando variable temporal 'temp'
+            Jugador temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;        
+        }
+    }
+
+    // llamadas recursivas para subdividir el arreglo
+    quickSortArray(arr, izquierda, j);
+    quickSortArray(arr, i, derecha);
+}
+
+// 4. ordenamiento QuickSort (Por ranking - descendente)
+void ordenarPorRankingQuickSort(NodoJugador* fin) {
+    if (fin == nullptr || fin->siguiente == fin) {
+        return;    
+    }
+    int N = contarNodos(fin);
+    // creamos una arreglo dinámico para copiar los datos reales
+    Jugador* arr = new Jugador[N];
+
+    // copiamos los datos de la lista circular al arreglo
+    NodoJugador* actual = fin->siguiente;
+    for (int i = 0; i < N; i++) {
+        arr[i] = actual->dato;
+        actual = actual->siguiente;    
+    }
+
+    // ejecutamos quicksort sobre el arreglo de structs
+    quickSortArray(arr, 0, N - 1);
+
+    // copiamos los datos ya ordenados del arreglo de regreso a la lista circular
+    actual = fin->siguiente;
+    for (int i = 0; i < N; i++) {
+        actual->dato = arr[i];
+        actual = actual->siguiente;    
+    }
+
+    // liberamos la memoria del arreglo temporal para evitar fuga de memoria
+    delete [] arr;
+}
