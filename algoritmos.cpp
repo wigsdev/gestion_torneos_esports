@@ -1,4 +1,5 @@
 #include "algoritmos.h"
+#include "estructuras.h"
 #include "jugadores.h"
 
 // ==============================================================================
@@ -82,4 +83,33 @@ void ordenarPorEdadBurbuja(NodoJugador *fin) {
         
         }
     }while (intercambiado); // si en una pasada completa hubo algún cambio, repetimos.
+}
+
+// 2. Ordenamiento por seleccion (Por nickname)
+void ordenarPorNicknameSeleccion(NodoJugador *fin) {
+    if (fin == nullptr) {
+        return; // lista vacía, noda que ordenar    
+    }
+
+    NodoJugador* actual = fin->siguiente; // empezamos en la cabeza
+    do {
+        NodoJugador* minimo = actual;
+        NodoJugador* busqueda = actual->siguiente;
+
+        // recorremos el resto de la lista circular buscando el nickname menor
+        while (busqueda != fin->siguiente) {
+            if (busqueda->dato.nickname < minimo->dato.nickname) {
+                minimo = busqueda;            
+            }
+            busqueda = busqueda->siguiente;
+        }
+
+        // si el menor es distinto al actual, intercambiamos los datos
+        if (minimo != actual) {
+            Jugador temp = actual->dato;
+            actual->dato = minimo->dato;
+            minimo->dato = temp;        
+        }
+        actual = actual->siguiente;
+    }while (actual != fin->siguiente);
 }

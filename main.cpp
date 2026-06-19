@@ -184,7 +184,7 @@ int main() {
                             if (opO == 1) {
                                 ordenarPorEdadBurbuja(listaJugadores);
                             } else if (opO == 2) {
-                                // ordenarPorNicknameSeleccion(listaJugadores);
+                                ordenarPorNicknameSeleccion(listaJugadores);
                             } else if (opO == 3) {
                                 // ordenarPorNombreInsercion(listaJugadores);
                             } else if (opO == 4) {
