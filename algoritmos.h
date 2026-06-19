@@ -8,7 +8,33 @@
 // --- TODO (Integrante 3) - BÚSQUEDAS Y RECURSIVIDAD ---
 // ==========================================
 // - buscarPorNickname (secuencial)
+
+NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
+    if (fin == nullptr) return nullptr;
+
+    NodoJugador* actual = fin->siguiente; 
+    do {
+        if (actual->dato.nickname == nickname) return actual;
+        actual = actual->siguiente;
+    } while (actual != fin->siguiente);
+
+    return nullptr;
+}
+
 // - buscarPorNombre (secuencial)
+
+NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre) {
+    if (fin == nullptr) return nullptr;
+
+    NodoJugador* actual = fin->siguiente; // cabeza
+    do {
+        if (actual->dato.nombre == nombre) return actual;
+        actual = actual->siguiente;
+    } while (actual != fin->siguiente);
+
+    return nullptr;
+}
+
 // - buscarPorIDBinaria
 // - mostrarRankingRecursivo
 // - contarJugadoresRecursivo
