@@ -1,4 +1,4 @@
-# 🖥️ Presentación del Proyecto: Gestión de Torneos de eSports
+# 🖥️ Presentación del Proyecto: Sistema de Gestión de Torneos de eSports
 
 ---
 
@@ -9,7 +9,7 @@
 │  Estructuras de Datos y Algoritmos Avanzados en C++      │
 ├──────────────────────────────────────────────────────────┤
 │  Autores:                                                │
-│  • Javier Flores  - Módulo 1 (Jugadores)                │
+│  • Javier Flores  - Módulo 1 y 2 (Jugadores y Partidas)  │
 │  • Víctor         - Módulo 3 y 4 (Colas y Pilas)         │
 │  • Wilmer         - Módulo 5, 6 y 7 (Algoritmos/Líder)   │
 └──────────────────────────────────────────────────────────┘
@@ -19,102 +19,107 @@
 
 ## 🎴 DIAPOSITIVA 2: Planteamiento del Problema
 *   **Desafío**: Administrar de manera eficiente el flujo competitivo de un torneo eSports (registro, colas FIFO, salón de la fama e historiales).
-*   **Reglas del Juego**:
-    *   ❌ Prohibido el uso de colecciones estándar (sin `std::vector`, `std::queue`, etc.).
-    *   ⚙️ Gestión pura de memoria dinámica y punteros.
-    *   📦 Modularización estricta en unidades de traducción (`.h` y `.cpp`).
+*   **Restricciones (Rúbrica)**:
+    *   ❌ Prohibido el uso de colecciones estándar (sin `vector`, `list`, `stack`, `queue`, `deque`).
+    *   ⚙️ Todo debe construirse desde cero utilizando memoria dinámica y punteros.
+    *   📦 Modularización estricta (`.h` y `.cpp`).
 
 ---
 
 ## 🎴 DIAPOSITIVA 3: Arquitectura y Dependencias
-*   **Nivel 1**: `estructuras.h` define los tipos fundamentales (`Jugador`, `Partida`, `Campeon`).
-*   **Nivel 2 (Estructuras)**:
+*   **Núcleo de Datos**: `estructuras.h` define los structs de negocio comunes (`Jugador`, `Partida`, `Campeon`).
+*   **Distribución Modular**:
     *   `jugadores.h` / `.cpp`
+    *   `partidas.h` / `.cpp`
     *   `cola.h` / `.cpp`
     *   `pila.h` / `.cpp`
-*   **Nivel 3 (Lógica de control)**:
-    *   `algoritmos.h` / `.cpp` (Motores de ordenamiento y reportes).
-    *   `main.cpp` (Menús y control).
-*   **Compilación**: Automatizada e incremental mediante `Makefile`.
+    *   `algoritmos.h` / `.cpp`
+*   **Compilación**: Automatizada mediante `Makefile` (soporta Windows `mingw32-make` y Linux `make`).
 
 ---
 
-## 🎴 DIAPOSITIVA 4: Gestión de Jugadores (Lista Circular)
-```text
-  ┌───────┐      ┌───────┐      ┌───────┐
-  │ Jug 1 │ ───> │ Jug 2 │ ───> │ Jug 3 │ ──┐
-  └───────┘      └───────┘      └───────┘   │
-      ▲                                     │
-      └─────────────────────────────────────┘
-                 (Puntero al Fin)
-```
-*   **Nodo**: `NodoJugador` { `Jugador dato`, `NodoJugador* siguiente` }.
-*   **Representación**: Puntero al último elemento (`fin`).
-*   **Rendimiento**: Inserción al final en tiempo constante $O(1)$.
-*   **Funciones**: Registro ($O(1)$), Eliminación ($O(N)$), Modificación y Listado completo.
+## 🎴 DIAPOSITIVA 4: Módulo 1: Gestión de Jugadores
+*   **Estructura / Implementación**: Lista Circular (circularmente enlazada).
+*   **Razón de Selección**: Los torneos avanzan ronda tras ronda.
+*   **Datos Almacenados**:
+    *   `ID` (Identificador único)
+    *   `Nombre` (Nombre completo del competidor)
+    *   `Nickname` (Apodo en el videojuego)
+    *   `Edad` (Edad en años)
+    *   `Puntaje Ranking` (Puntaje competitivo acumulado)
+*   **Opciones Implementadas**:
+    *   **Registrar jugador**: Inserción en tiempo constante $O(1)$ al final de la lista circular a través de puntero `fin`.
+    *   **Eliminar jugador**: Desconexión y liberación de memoria del nodo en $O(N)$.
+    *   **Modificar jugador**: Localización por ID y actualización de datos en $O(N)$.
+    *   **Mostrar jugadores**: Recorrido circular completo imprimiendo el listado de competidores.
 
 ---
 
-## 🎴 DIAPOSITIVA 5: Inscripciones e Historial
-*   **Cola de Espera (Inscripciones - FIFO)**:
-    *   Control mediante punteros `frente` y `fin`.
-    *   *Integración*: El jugador es desencolado y se registra en la lista circular en tiempo constante $O(1)$.
-*   **Historial de Partidas**:
-    *   Lista enlazada simple lineal.
-    *   Almacena el registro histórico permanente.
+## 🎴 DIAPOSITIVA 5: Módulo 2: Gestión de Partidas
+*   **Estructura / Implementación**: Lista Simple (linealmente enlazada).
+*   **Guardar / Datos Registrados**:
+    *   `Jugador A` (Primer contrincante)
+    *   `Jugador B` (Segundo contrincante)
+    *   `Ganador` (Nombre/Nickname del vencedor)
+    *   `Fecha` (Fecha del encuentro)
+*   **Propósito / Operaciones**:
+    *   Registrar resultado de partida (inserción simple en el historial).
+    *   Mostrar historial completo de partidas (recorrido secuencial lineal).
 
 ---
 
-## 🎴 DIAPOSITIVA 6: Salón de la Fama (Pila LIFO)
-```text
-  ┌───────────────────────────────────┐
-  │ Cima: Campeón Torneo Reciente     │  ──> Consulta y Eliminación en O(1)
-  ├───────────────────────────────────┤
-  │ Nodo 2: Campeón Anterior          │
-  ├───────────────────────────────────┤
-  │ Base: Primer Campeón del Historial│
-  └───────────────────────────────────┘
-```
-*   **Nodo**: `NodoCampeon` { `Campeon dato`, `NodoCampeon* siguiente` }.
-*   **Eficiencia**: Push y Pop en la cima en $O(1)$.
-*   **Acceso**: Consulta instantánea del campeón más reciente en $O(1)$.
+## 🎴 DIAPOSITIVA 6: Módulo 3: Cola de Inscripciones
+*   **Estructura / Implementación**: Cola (Estructura lineal FIFO - First In, First Out).
+*   **Opciones Implementadas**:
+    *   **Inscribir jugador**: Encolar al final de la estructura de espera ($O(1)$).
+    *   **Mostrar cola**: Visualizar secuencialmente los jugadores en espera de ser admitidos.
+    *   **Atender inscripción**: Desencolar al primer jugador en espera ($O(1)$) y registrarlo directamente en el Módulo 1 (Lista Circular).
 
 ---
 
-## 🎴 DIAPOSITIVA 7: Motor de Búsquedas
+## 🎴 DIAPOSITIVA 7: Módulo 4: Historial de Campeones
+*   **Estructura / Implementación**: Pila (Estructura lineal LIFO - Last In, First Out).
+*   **Guardar / Información**: Campeón de cada torneo.
+*   **Funciones Implementadas**:
+    *   **Mostrar historial**: Imprime recursiva o iterativamente todos los campeones registrados en la pila, desde el más reciente hasta el más antiguo.
+    *   **Consultar último campeón**: Visualizar al campeón en la cima de la pila sin desapilar ($O(1)$).
+    *   *Adicional*: Apilar nuevo campeón (Push) y eliminar último registrado (Pop).
+
+---
+
+## 🎴 DIAPOSITIVA 8: Módulo 5: Búsquedas
 *   **Búsqueda Secuencial ($O(N)$)**:
-    *   Búsqueda por **Nickname** y **Nombre real**.
-    *   Aplicada directamente sobre la lista circular.
+    *   **Buscar por Nickname**: Búsqueda secuencial en la lista circular (case-insensitive).
+    *   **Buscar por Nombre**: Búsqueda secuencial en la lista circular (case-insensitive).
 *   **Búsqueda Binaria ($O(\log N)$)**:
-    *   Vuelca temporalmente las direcciones de los nodos de la lista circular a un arreglo dinámico indexado.
-    *   Permite saltos de memoria física y división logarítmica.
+    *   **Buscar por ID**: Búsqueda binaria.
+    *   *Mecánica*: Vuelca temporalmente los punteros de los nodos de la lista circular a un arreglo dinámico para permitir el acceso aleatorio directo y realizar la división de intervalos logarítmicos.
 
 ---
 
-## 🎴 DIAPOSITIVA 8: Algoritmos de Ordenamiento
-*   **Complejidad cuadrática ($O(N^2)$)**:
-    *   **Burbuja** (por Edad).
-    *   **Selección** (por Nickname).
-    *   **Inserción** (por Nombre).
-*   **Complejidad logarítmica ($O(N \log N)$)**:
-    *   **Quick Sort** (descendente por Ranking).
-    *   **Merge Sort** (ascendente por ID).
-*   *Optimización*: Intercambio del contenido del struct `Jugador` en los nodos.
+## 🎴 DIAPOSITIVA 9: Módulo 6: Ordenamientos
+Se implementaron cinco algoritmos clásicos de ordenamiento, cada uno aplicando un criterio de orden específico sobre los datos de los jugadores:
+*   **Burbuja (Bubble Sort)**: Ordena **Por edad** (de manera ascendente, $O(N^2)$).
+*   **Selección (Selection Sort)**: Ordena **Por nickname** (de manera alfabética, $O(N^2)$).
+*   **Inserción (Insertion Sort)**: Ordena **Por nombre** (de manera alfabética, $O(N^2)$).
+*   **Quick Sort**: Ordena **Por ranking** (de manera descendente, $O(N \log N)$).
+*   **Merge Sort**: Ordena **Por ID** (de manera ascendente, $O(N \log N)$).
 
 ---
 
-## 🎴 DIAPOSITIVA 9: Reportes Estadísticos y Recursividad
-*   **Recursividad Pura**:
-    *   Impresión de Ranking.
-    *   Conteo de Jugadores.
-    *   Suma acumulada de Rankings.
-    *   Búsqueda por Nickname.
-*   *Caso Base Crítico*: Detección del retorno al nodo cabeza (`nodo == fin->siguiente`).
+## 🎴 DIAPOSITIVA 10: Módulo 7: Recursividad
+Operaciones críticas implementadas bajo enfoque puramente recursivo (sin bucles iterativos `for`/`while`):
+*   **Mostrar ranking recursivamente**: Recorrido de los jugadores mostrando su nickname y puntaje en orden inverso o directo.
+*   **Contar jugadores recursivamente**: Cuenta el número total de nodos activos en la lista circular.
+*   **Calcular suma de puntajes recursivamente**: Suma acumulada de los puntajes de ranking de todos los jugadores registrados.
+*   **Buscar jugador recursivamente**: Búsqueda recursiva basada en el nickname.
+*   *Manejo de Caso Base*: Control riguroso del puntero de retorno al primer nodo (`nodo == fin->siguiente`) para evitar la recursión infinita en la lista circular.
 
 ---
 
-## 🎴 DIAPOSITIVA 10: Conclusiones
-*   La separación de cabeceras `.h` e implementaciones `.cpp` evita conflictos de enlace múltiple.
-*   El uso de la estructura circular con puntero a `fin` optimiza las inserciones a $O(1)$ sin ciclos innecesarios.
-*   El control de memoria manual exige la liberación rigurosa con `delete` para evitar fugas.
+## 🎴 DIAPOSITIVA 11: Conclusiones
+*   La separación de cabeceras e implementaciones (.h/.cpp) previene errores de definición de símbolos.
+*   El diseño circular de jugadores optimiza las operaciones cíclicas del torneo.
+*   El uso de la estructura circular con puntero a `fin` reduce la inserción a $O(1)$.
+*   Las validaciones de unicidad de ID y búsquedas case-insensitive robustecen la integridad de los datos.
 *   **Demostración Práctica en Consola (Demo en Vivo)**.

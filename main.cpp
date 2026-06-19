@@ -317,12 +317,12 @@ int main() {
                             cout << "Ingrese Nickname del Ganador: "; getline(cin, p.ganador);
                             cout << "Ingrese Fecha (DD/MM/AAAA): "; getline(cin, p.fecha);
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 2):
-                            // registrarPartida(listaPartidas, p);
+                            registrarPartida(listaPartidas, p);
                             break;
                         }
                         case 2:
                             // LLAMADA INTEGRANTE 1 (Javier - Módulo 2):
-                            // mostrarPartidas(listaPartidas);
+                            mostrarPartidas(listaPartidas);
                             break;
                     }
                 } while (op != 3);
