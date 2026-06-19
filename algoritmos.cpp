@@ -389,17 +389,28 @@ NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string 
     return buscarJugadorRecursivo(nodo->siguiente, fin, nickname, false);
 }
 
-// ==========================================
-// --- TODO (Integrante 3) - BÚSQUEDAS Y RECURSIVIDAD ---
-// ==========================================
-// - buscarPorNickname (secuencial)
+// ==============================================================================
+// --- FUNCIÓN AUXILIAR DE NORMALIZACIÓN DE TEXTO ---
+// ==============================================================================
+#include <cctype>
 
+string aMinusculas(string str) {
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+// ==============================================================================
+// --- VICTOR (Integrante 2) - MÓDULO 5: MOTORES DE BÚSQUEDA (SECUENCIAL CASE-INSENSITIVE) ---
+// ==============================================================================
+
+// - buscarPorNickname (secuencial)
 NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
     if (fin == nullptr) return nullptr;
 
     NodoJugador* actual = fin->siguiente; 
+    string nickBusqueda = aMinusculas(nickname);
     do {
-        if (actual->dato.nickname == nickname) return actual;
+        if (aMinusculas(actual->dato.nickname) == nickBusqueda) return actual;
         actual = actual->siguiente;
     } while (actual != fin->siguiente);
 
@@ -407,13 +418,13 @@ NodoJugador* buscarPorNickname(NodoJugador* fin, string nickname) {
 }
 
 // - buscarPorNombre (secuencial)
-
 NodoJugador* buscarPorNombre(NodoJugador* fin, string nombre) {
     if (fin == nullptr) return nullptr;
 
     NodoJugador* actual = fin->siguiente; // cabeza
+    string nombreBusqueda = aMinusculas(nombre);
     do {
-        if (actual->dato.nombre == nombre) return actual;
+        if (aMinusculas(actual->dato.nombre) == nombreBusqueda) return actual;
         actual = actual->siguiente;
     } while (actual != fin->siguiente);
 

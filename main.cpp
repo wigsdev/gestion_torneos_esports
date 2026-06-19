@@ -10,6 +10,28 @@
 using namespace std;
 
 // ==============================================================================
+// FUNCIONES AUXILIARES DE VALIDACIÓN DE UNICIDAD DE ID
+// ==============================================================================
+bool existeID(NodoJugador* fin, int id) {
+    if (fin == nullptr) return false;
+    NodoJugador* actual = fin->siguiente; // cabeza
+    do {
+        if (actual->dato.id == id) return true;
+        actual = actual->siguiente;
+    } while (actual != fin->siguiente);
+    return false;
+}
+
+bool existeIDEnCola(NodoCola* frente, int id) {
+    NodoCola* actual = frente;
+    while (actual != nullptr) {
+        if (actual->dato.id == id) return true;
+        actual = actual->siguiente;
+    }
+    return false;
+}
+
+// ==============================================================================
 // 1. PUNTEROS GLOBALES / DE CONTROL DE LAS ESTRUCTURAS
 // ==============================================================================
 NodoJugador* listaJugadores = nullptr; // Módulo 1: Lista Circular de Jugadores (Javier)
@@ -115,8 +137,14 @@ int main() {
                     cin >> op;
                     switch (op) {
                         case 1: {
+                            int id;
+                            cout << "Ingrese ID: "; cin >> id;
+                            if (existeID(listaJugadores, id) || existeIDEnCola(colaFrente, id)) {
+                                cout << ">> [ERROR] El ID " << id << " ya está registrado o en cola de espera. Registro cancelado." << endl;
+                                break;
+                            }
                             Jugador nuevo;
-                            cout << "Ingrese ID: "; cin >> nuevo.id;
+                            nuevo.id = id;
                             cout << "Ingrese Nombre: "; cin.ignore(); getline(cin, nuevo.nombre);
                             cout << "Ingrese Nickname: "; getline(cin, nuevo.nickname);
                             cout << "Ingrese Edad: "; cin >> nuevo.edad;
@@ -235,8 +263,14 @@ int main() {
                     cin >> op;
                     switch (op) {
                         case 1: {
+                            int id;
+                            cout << "Ingrese ID: "; cin >> id;
+                            if (existeID(listaJugadores, id) || existeIDEnCola(colaFrente, id)) {
+                                cout << ">> [ERROR] El ID " << id << " ya está registrado o en cola de espera. Registro cancelado." << endl;
+                                break;
+                            }
                             Jugador j;
-                            cout << "Ingrese ID: "; cin >> j.id;
+                            j.id = id;
                             cout << "Ingrese Nombre: "; cin.ignore(); getline(cin, j.nombre);
                             cout << "Ingrese Nickname: "; getline(cin, j.nickname);
                             cout << "Ingrese Edad: "; cin >> j.edad;
@@ -257,11 +291,13 @@ int main() {
                             } else {
                                 // Desencola (Victor - Integrante 2 - M3) e Inserta (Javier - Integrante 1 - M1)
                                 Jugador jAtendido = desencolarInscripcion(colaFrente, colaFin);
-                                // Nota: registrarJugador se deja comentado porque Javier (Módulo 1) no está implementado
-                                registrarJugador(listaJugadores, jAtendido);
-                                cout << "Jugador " << jAtendido.nickname << " admitido en el torneo." << endl;
-                            }
-                            
+                                if (existeID(listaJugadores, jAtendido.id)) {
+                                    cout << ">> [ERROR] No se pudo admitir al jugador. El ID " << jAtendido.id << " ya fue registrado directamente." << endl;
+                                } else {
+                                    registrarJugador(listaJugadores, jAtendido);
+                                    cout << "Jugador " << jAtendido.nickname << " admitido en el torneo." << endl;
+                                }
+                            }                            
                             break;
                         }
                     }
