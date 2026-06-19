@@ -35,6 +35,6 @@ void ordenarPorIDMergeSort(NodoJugador* fin);
 void mostrarRankingRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 int contarJugadoresRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 int sumarPuntajesRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
-// - NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string nickname, bool primeraVuelta);
+NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string nickname, bool primeraVuelta);
 
 #endif

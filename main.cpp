@@ -317,7 +317,13 @@ int main() {
                             string nick;
                             cout << "Ingrese Nickname a buscar recursivamente: "; cin.ignore(); getline(cin, nick);
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            NodoJugador* res = buscarJugadorRecursivo(listaJugadores, listaJugadores, nick, true);
+                            if (res != nullptr) {
+                                cout << "Jugador encontrado recursivamente!" << endl;
+                                cout << "Nombre: " << res->dato.nombre << " | Ranking: " << res->dato.ranking << endl;                            
+                            } else {
+                                cout << "Jugador con nickname '" << nick << "' no fue encontrado." << endl;
+                            }
                             break;
                         }
                     }

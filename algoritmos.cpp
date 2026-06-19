@@ -367,3 +367,24 @@ int sumarPuntajesRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVuel
     // llamada recursiva: sumamos el puntaje del nodo actual más la suma recursiva del resto de la lista
     return nodo->dato.ranking + sumarPuntajesRecursivo(nodo->siguiente, fin, false);
 }
+
+// 4. buscar jugador recursivamente por nickname
+NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string nickname, bool primeraVuelta) {
+    // caso base 1: lista vacía
+    if (nodo == nullptr) {
+        return nullptr;    
+    }
+
+    // caso base de éxito: encontramos la coincidencia por nickname
+    if (nodo->dato.nickname == nickname) {
+        return nodo;    
+    }
+
+    // caso base 2: dimos la vuelta completa y no lo encontramos
+    if (!primeraVuelta && nodo == fin->siguiente) {
+        return nullptr;    
+    }
+
+    // llamada recursiva: avanzamos al siguiente nodo y marcamos primeraVuelta como 'false'
+    return buscarJugadorRecursivo(nodo->siguiente, fin, nickname, false);
+}
