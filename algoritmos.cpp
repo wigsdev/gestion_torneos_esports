@@ -351,3 +351,19 @@ int contarJugadoresRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVu
     // llamada recursiva: sumamos 1 por el nodo actual mas el resultado del conteo del resto de la lista
     return 1 + contarJugadoresRecursivo(nodo->siguiente, fin, false);
 }
+
+// 3. sumar puntajes de Ranking Recursivamente
+int sumarPuntajesRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVuelta) {
+    // caso base 1: lista vacia
+    if (nodo == nullptr) {
+        return 0;    
+    }
+
+    // caso base 2: dimos la vuelta completa
+    if (!primeraVuelta && nodo == fin->siguiente) {
+        return 0;
+    }
+
+    // llamada recursiva: sumamos el puntaje del nodo actual más la suma recursiva del resto de la lista
+    return nodo->dato.ranking + sumarPuntajesRecursivo(nodo->siguiente, fin, false);
+}

@@ -309,8 +309,8 @@ int main() {
                         }
                         case 3: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
-                            // cout << "Suma total de puntajes de ranking: " << suma << endl;
+                            int suma = sumarPuntajesRecursivo(listaJugadores, listaJugadores, true);
+                            cout << "Suma total de puntajes de ranking: " << suma << endl;
                             break;
                         }
                         case 4: {
