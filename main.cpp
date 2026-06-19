@@ -299,7 +299,7 @@ int main() {
                     switch (op) {
                         case 1:
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):
-                            // mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
+                            mostrarRankingRecursivo(listaJugadores, listaJugadores, true);
                             break;
                         case 2: {
                             // LLAMADA INTEGRANTE 3 (Wilmer - Módulo 7 - Recursivo):

@@ -32,7 +32,7 @@ void ordenarPorIDMergeSort(NodoJugador* fin);
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 7: REPORTES ESTADÍSTICOS RECURSIVOS ---
 // ==============================================================================
 // Declarar aquí los reportes analíticos utilizando recursividad:
-// - void mostrarRankingRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
+void mostrarRankingRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 // - int contarJugadoresRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 // - int sumarPuntajesRecursivo(NodoJugador* nodo, NodoJugador* fin, bool primeraVuelta);
 // - NodoJugador* buscarJugadorRecursivo(NodoJugador* nodo, NodoJugador* fin, string nickname, bool primeraVuelta);

@@ -2,6 +2,10 @@
 #include "estructuras.h"
 #include "jugadores.h"
 #include <algorithm>
+#include <optional>
+#include <iostream>
+
+using namespace std;
 
 // ==============================================================================
 // --- WILMER (Integrante 3 - LÍDER) - MÓDULO 5: MOTORES DE BÚSQUEDA (BINARIA) ---
@@ -305,4 +309,29 @@ void ordenarPorIDMergeSort(NodoJugador *fin) {
     }
 
     delete[] arr; // liberamos el arreglo dinámico
-} 
+}
+
+// ==============================================================================
+// --- WILMER (Integrante 3 - LÍDER) - MÓDULO 7: REPORTES ESTADÍSTICOS RECURSIVOS ---
+// ==============================================================================
+// Implementación de los reportes analíticos utilizando recursividad:
+
+// 1. Mostrar Ranking Recursivo
+
+void mostrarRankingRecursivo(NodoJugador *nodo, NodoJugador *fin, bool primeraVuelta) {
+    // caso base 1: lista vacía
+    if (nodo == nullptr) {
+        return;    
+    }
+
+    // caso base 2: ya dimos la vuelta completa y volvimos al nodo inicial (cabeza)
+    if (!primeraVuelta && nodo == fin->siguiente) {
+        return;    
+    }
+
+    // acción: imprimimos los datos del jugador actual
+    cout << "Nickname: " << nodo->dato.nickname << " | Ranking: " << nodo->dato.ranking << endl;
+
+    // llamada recursiva: pasamos al siguiente nodo y marcamos primeravuelta como 'false'
+    mostrarRankingRecursivo(nodo->siguiente, fin, false);
+}
